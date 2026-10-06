@@ -6,6 +6,8 @@ import { teamName } from "@/lib/format";
 export function ConsensusTable({ season, week }: { season: number; week: number }) {
   const rows = consensusFor(season, week);
   const prev = previousConsensusRanks(season, week);
+  const rankCounts = new Map<number, number>();
+  for (const r of rows) rankCounts.set(r.rank, (rankCounts.get(r.rank) ?? 0) + 1);
   if (!rows.length) return <p className="muted">No ballots for this week.</p>;
   return (
     <div className="table-wrap">
@@ -26,7 +28,10 @@ export function ConsensusTable({ season, week }: { season: number; week: number 
             const move = p === undefined ? null : p - r.rank;
             return (
               <tr key={r.team}>
-                <td className="num">{r.rank}</td>
+                <td className="num">
+                  {rankCounts.get(r.rank)! > 1 ? "T-" : ""}
+                  {r.rank}
+                </td>
                 <td>{teamName(r.team)}</td>
                 <td className="muted">{conferenceOf(r.team, season)}</td>
                 <td className="num">{r.points}</td>

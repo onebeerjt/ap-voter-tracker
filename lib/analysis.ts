@@ -37,8 +37,11 @@ const consensusCache = new Map<string, ConsensusRow[]>();
 
 /**
  * Weekly consensus top 25 computed from the ballots with a Borda count.
- * Ties are broken by first-place votes, then by number of ballots ranking the
- * team, then alphabetically by team id (so the order is deterministic).
+ * Rows are ordered by points, then first-place votes, then number of ballots
+ * ranking the team, then alphabetically by team id (so the order is
+ * deterministic). Teams equal on points, first-place votes and ballots share a
+ * rank (standard competition ranking: 1, 2, 2, 4); the alphabetical order only
+ * decides display order within a tie.
  */
 export function consensusFor(season: number, week: number): ConsensusRow[] {
   const key = `${season}-${week}`;
@@ -64,7 +67,12 @@ export function consensusFor(season: number, week: number): ConsensusRow[] {
         a.team.localeCompare(b.team),
     )
     .slice(0, 25)
-    .map((r, i) => ({ ...r, rank: i + 1 }));
+    .map((r, i, all) => {
+      const first = all.findIndex(
+        (o) => o.points === r.points && o.firstPlaceVotes === r.firstPlaceVotes && o.ballots === r.ballots,
+      );
+      return { ...r, rank: first + 1 };
+    });
   consensusCache.set(key, rows);
   return rows;
 }
