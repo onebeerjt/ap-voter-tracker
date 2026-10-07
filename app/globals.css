@@ -82,3 +82,68 @@ input[type="search"] { min-width: 260px; }
 .prose { max-width: 720px; }
 .prose p, .prose li { margin: 8px 0; }
 .prose code { background: var(--row); padding: 1px 4px; border-radius: 3px; }
+
+/* ---------- viz ---------- */
+.viz-lead { margin: 4px 0 14px; max-width: 760px; }
+.viz-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; }
+.viz-title { font-size: 22px; margin: 2px 0 6px; }
+.viz-body { color: var(--text); margin: 0; }
+.viz-body .muted { color: var(--muted); }
+.viz-controls { display: flex; gap: 12px; flex-wrap: wrap; margin: 0 0 14px; }
+.viz-picker { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+.viz-picker select { font: inherit; color: var(--text); padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); max-width: 280px; }
+.viz-season-btn { font: inherit; margin-left: 8px; padding: 2px 10px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); cursor: pointer; }
+.viz-season-btn[aria-pressed="true"] { background: var(--text); color: #fff; border-color: var(--text); }
+.viz-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 18px; }
+.viz-tab { font: inherit; font-size: 13px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 20px; background: var(--panel); cursor: pointer; color: var(--text); }
+.viz-tab[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.viz-view { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.viz-chart-wrap { overflow-x: auto; }
+.viz-chart { width: 100%; height: auto; display: block; }
+.viz-tick { font-size: 11px; fill: var(--muted); }
+.viz-axis { font-size: 12px; fill: var(--muted); }
+.viz-label { font-size: 11px; font-weight: 600; }
+.viz-anno { font-size: 11px; fill: var(--muted); font-style: italic; }
+.viz-arrows { display: flex; flex-direction: column; gap: 10px; }
+.viz-arrow-row { display: grid; grid-template-columns: 170px 1fr 70px; gap: 10px; align-items: center; }
+.viz-arrow-row.slim { grid-template-columns: 150px 1fr 60px; }
+.viz-arrow-conf { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.viz-arrow-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+.viz-arrow-story { grid-column: 1 / -1; font-size: 13px; }
+.viz-diverge { position: relative; background: var(--row); border-radius: 4px; overflow: hidden; }
+.viz-diverge-mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.viz-diverge-fill { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+.viz-diverge-fill.left { background: var(--up); }
+.viz-diverge-fill.right { background: var(--down); }
+.viz-card { border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: var(--panel); }
+.viz-card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.viz-card-name { font-size: 20px; font-weight: 700; }
+.viz-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.viz-stat { background: var(--row); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.viz-stat-v { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.viz-stat-l { font-size: 12px; color: var(--muted); }
+.viz-stat.up .viz-stat-v { color: var(--up); }
+.viz-stat.down .viz-stat-v { color: var(--down); }
+.viz-h3 { font-size: 14px; margin: 14px 0 8px; }
+.viz-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.viz-list-row { display: grid; grid-template-columns: 44px 1fr 44px; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--panel); }
+.viz-list-rank { font-weight: 800; color: var(--muted); }
+.viz-list-main { min-width: 0; }
+.viz-list-story { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.viz-list-num { font-size: 22px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.viz-homers { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.viz-homer-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; }
+.viz-homer-top { display: flex; justify-content: space-between; align-items: center; }
+.viz-homer-rank { font-weight: 800; color: var(--muted); }
+.viz-homer-story { font-size: 14px; line-height: 1.5; }
+.viz-hover-readout { font-size: 13px; color: var(--muted); min-height: 20px; margin-top: 8px; }
+.viz-crown-week { margin-bottom: 10px; }
+.viz-crown-label { font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+.viz-crown-bar { display: flex; height: 22px; border-radius: 5px; overflow: hidden; background: var(--row); }
+.viz-crown-seg { min-width: 3px; }
+.viz-crown-teams { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; }
+.viz-crown-team { font-size: 12px; color: var(--muted); border-left: 3px solid; padding-left: 5px; }
+@media (max-width: 640px) {
+  .viz-arrow-row { grid-template-columns: 130px 1fr 56px; }
+  .viz-view { padding: 12px; }
+}
