@@ -75,8 +75,7 @@ export default function VizPage() {
         {view === "crown" && <CrownView season={season} />}
       </div>
       <p className="note" style={{ marginTop: 24 }}>
-        Built on {seasons.find((s) => s.year === season) ? "" : ""}the same ballots as the rest of the site — nothing
-        here changes the underlying data.
+        Built on the same ballots as the rest of the site — nothing here changes the underlying data.
       </p>
     </>
   );

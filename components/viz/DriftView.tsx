@@ -27,15 +27,22 @@ export default function DriftView({ season }: { season: number }) {
   const x = (i: number) => PAD.l + (i / Math.max(1, weeks.length - 1)) * (W - PAD.l - PAD.r);
   const y = (r: number | null) => (r === null ? NaN : PAD.t + ((r - 1) / 25) * (H - PAD.t - PAD.b));
 
-  const line = (get: (p: (typeof pts)[number]) => number | null) =>
-    pts
-      .map((p, i) => {
-        const v = get(p);
-        return Number.isNaN(y(v)) ? null : `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`;
-      })
-      .filter(Boolean)
-      .join(" ")
-      .replace(/L(?=M)/g, "M");
+  const line = (get: (p: (typeof pts)[number]) => number | null) => {
+    // Build separate subpaths so gaps (nulls) actually break the line.
+    const parts: string[] = [];
+    let cur: string[] = [];
+    pts.forEach((p, i) => {
+      const v = get(p);
+      if (v === null || Number.isNaN(y(v))) {
+        if (cur.length) parts.push(cur.join(" "));
+        cur = [];
+      } else {
+        cur.push(`${cur.length === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`);
+      }
+    });
+    if (cur.length) parts.push(cur.join(" "));
+    return parts.join(" ");
+  };
 
   const gaps = pts.filter((p) => p.voterRank !== null && p.consensusRank !== null && Math.abs(p.voterRank - p.consensusRank) >= 5);
   const maxGap = gaps.length ? Math.max(...gaps.map((p) => Math.abs((p.voterRank ?? 0) - (p.consensusRank ?? 0)))) : 0;
