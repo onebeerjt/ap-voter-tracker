@@ -15,7 +15,10 @@ export default function BiasArrowsView({ season }: { season: number }) {
   const name = voterName(voter);
 
   const headline = arrows[0];
-  const anti = [...arrows].reverse().find((a) => a.avgDiff > 0.5);
+  // Strongest lean in the opposite direction from the headline, for contrast.
+  const anti = headline
+    ? arrows.filter((a) => Math.sign(a.avgDiff) === -Math.sign(headline.avgDiff) && Math.abs(a.avgDiff) >= 0.5)[0]
+    : undefined;
 
   return (
     <div>

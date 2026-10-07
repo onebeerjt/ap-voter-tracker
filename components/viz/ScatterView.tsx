@@ -47,7 +47,7 @@ export default function ScatterView({ season }: { season: number }) {
             agree with the pack. The farther a dot strays, the louder the disagreement —{" "}
             <strong style={{ color: "var(--up)" }}>green above the line</strong> means the voter is higher on them,{" "}
             <strong style={{ color: "var(--down)" }}>red below</strong> means lower.{" "}
-            {pts.length > 0 && (
+            {pts.length > 0 ? (
               <>
                 This ballot agrees within 2 spots on {agree} of {pts.length} teams
                 {wild.length > 0 && (
@@ -57,6 +57,8 @@ export default function ScatterView({ season }: { season: number }) {
                 )}
                 .
               </>
+            ) : (
+              <>No ballot from this voter that week — pick another week.</>
             )}
           </>
         }

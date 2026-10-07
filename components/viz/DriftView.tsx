@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { drift, teamName, teamOptions, voterName, voterOptions } from "@/lib/viz";
-import { seasonMeta, weekLabel } from "@/lib/data";
+import { drift, teamName, teamOptions, topTeams, voterName, voterOptions } from "@/lib/viz";
+import { latestWeek, seasonMeta, weekLabel } from "@/lib/data";
 import { Picker, StoryLead } from "./ui";
 
 const W = 640;
@@ -18,7 +18,8 @@ export default function DriftView({ season }: { season: number }) {
   const teams = useMemo(() => teamOptions(season), [season]);
   const weeks = seasonMeta(season).weeks.map((w) => w.week);
   const [voter, setVoter] = useState(voters[0]?.id ?? "");
-  const [team, setTeam] = useState(teams[0]?.id ?? "");
+  const defaultTeam = useMemo(() => topTeams(season, latestWeek(season))[0]?.id ?? teams[0]?.id ?? "", [season, teams]);
+  const [team, setTeam] = useState(defaultTeam);
 
   const pts = useMemo(() => drift(voter, team, season), [voter, team, season]);
   const vn = voterName(voter);

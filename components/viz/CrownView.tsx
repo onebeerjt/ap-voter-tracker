@@ -33,8 +33,6 @@ export default function CrownView({ season }: { season: number }) {
     return sorted.slice(0, 3);
   }, [weeks]);
 
-  const maxLeaders = Math.max(...weeks.map((w) => w.leaders.length), 1);
-
   return (
     <div>
       <StoryLead
