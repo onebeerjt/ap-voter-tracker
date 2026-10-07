@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { homers } from "@/lib/viz";
-import { StoryLead, LeanArrow, DivergeBar, fmtDiff } from "./ui";
+import { StoryLead, BigArrow, DivergeBar, fmtDiff } from "./ui";
 
 /**
  * VIEW 8 — "The homers": narrative cards for the biggest systematic team leans.
@@ -41,7 +41,7 @@ export default function HomersView({ season }: { season: number }) {
           <div key={`${r.voterId}-${r.team}`} className="viz-homer-card">
             <div className="viz-homer-top">
               <span className="viz-homer-rank">#{i + 1}</span>
-              <LeanArrow diff={r.avgDiff} size={20} />
+              <BigArrow diff={r.avgDiff} />
             </div>
             <div className="viz-homer-story">
               <Link href={`/voter/${r.voterId}?season=${season}`}><strong>{r.voterName}</strong></Link>{" "}
