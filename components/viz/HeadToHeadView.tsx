@@ -15,6 +15,13 @@ export default function HeadToHeadView({ season }: { season: number }) {
   const [a, setA] = useState(voters[0]?.id ?? "");
   const [b, setB] = useState(voters[1]?.id ?? voters[0]?.id ?? "");
   const [week, setWeek] = useState(String(latestWeek(season)));
+  const pickA = (id: string) => {
+    setA(id);
+    if (b === id) {
+      const other = voters.find((v) => v.id !== id);
+      if (other) setB(other.id);
+    }
+  };
 
   const rows = useMemo(() => {
     const wb = weekBallots(season, Number(week));
@@ -67,8 +74,8 @@ export default function HeadToHeadView({ season }: { season: number }) {
         }
       />
       <div className="viz-controls">
-        <Picker label="Voter A" value={a} onChange={setA} options={voters.map((v) => ({ value: v.id, label: v.name }))} />
-        <Picker label="Voter B" value={b} onChange={setB} options={voters.map((v) => ({ value: v.id, label: v.name }))} />
+        <Picker label="Voter A" value={a} onChange={pickA} options={voters.map((v) => ({ value: v.id, label: v.name }))} />
+        <Picker label="Voter B" value={b} onChange={setB} options={voters.filter((v) => v.id !== a).map((v) => ({ value: v.id, label: v.name }))} />
         <Picker label="Week" value={week} onChange={setWeek} options={weeks.map((w) => ({ value: String(w.week), label: w.label }))} />
       </div>
       {!rows ? (

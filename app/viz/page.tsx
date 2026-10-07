@@ -62,7 +62,7 @@ export default function VizPage() {
           </button>
         ))}
       </nav>
-      <div className="viz-view">
+      <div className="viz-view" key={season}>
         {view === "scatter" && <ScatterView season={season} />}
         {view === "arrows" && <BiasArrowsView season={season} />}
         {view === "fingerprint" && <FingerprintView season={season} />}

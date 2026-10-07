@@ -5,6 +5,7 @@ import { conferenceHeatmap, voterName } from "@/lib/viz";
 import { StoryLead } from "./ui";
 
 const CELL = 30;
+const COMPACT_N = 20;
 
 /**
  * VIEW 4 — "The grid": every voter × every conference, color = lean.
@@ -13,6 +14,8 @@ const CELL = 30;
 export default function HeatmapView({ season }: { season: number }) {
   const { cells, conferences, voterIds } = useMemo(() => conferenceHeatmap(season), [season]);
   const [hover, setHover] = useState<string | null>(null);
+  const [compact, setCompact] = useState(true);
+  const shownVoters = compact ? voterIds.slice(0, COMPACT_N) : voterIds;
 
   const cellMap = new Map(cells.map((c) => [`${c.voterId}|${c.conference}`, c]));
   const color = (d: number) => {
@@ -25,7 +28,7 @@ export default function HeatmapView({ season }: { season: number }) {
 
   const hoverCell = hover ? cellMap.get(hover) : null;
   const W = conferences.length * CELL + 190;
-  const H = voterIds.length * CELL + 40;
+  const H = shownVoters.length * CELL + 40;
 
   const mostLopsided = useMemo(() => {
     const sorted = [...cells].sort((a, b) => Math.abs(b.avgDiff) - Math.abs(a.avgDiff));
@@ -54,6 +57,14 @@ export default function HeatmapView({ season }: { season: number }) {
           </>
         }
       />
+      <div className="viz-controls">
+        <button className="viz-tab" aria-pressed={compact} onClick={() => setCompact(true)}>
+          Top {COMPACT_N} most opinionated
+        </button>
+        <button className="viz-tab" aria-pressed={!compact} onClick={() => setCompact(false)}>
+          All {voterIds.length} voters
+        </button>
+      </div>
       <div className="viz-chart-wrap">
         <svg viewBox={`0 0 ${W} ${H}`} className="viz-chart" style={{ maxWidth: 900 }} role="img" aria-label="Voter by conference bias heatmap">
           {conferences.map((c, i) => (
@@ -61,7 +72,7 @@ export default function HeatmapView({ season }: { season: number }) {
               {c}
             </text>
           ))}
-          {voterIds.map((vid, r) => (
+          {shownVoters.map((vid, r) => (
             <g key={vid}>
               <text x={182} y={40 + r * CELL + CELL / 2 + 4} textAnchor="end" className="viz-tick">
                 {voterName(vid).length > 24 ? voterName(vid).slice(0, 23) + "…" : voterName(vid)}
