@@ -62,7 +62,8 @@ export default async function VoterPage({ params }: { params: Promise<{ id: stri
             {" "}
             &middot; consensus fit {overall.fit.toFixed(1)} over {overall.ballots} ballots
           </>
-        )}
+        )}{" "}
+        &middot; <Link href="/viz">see them in visual stories &rarr;</Link>
       </p>
 
       <h2>Conference bias</h2>

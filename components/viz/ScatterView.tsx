@@ -80,16 +80,21 @@ export default function ScatterView({ season }: { season: number }) {
           {/* diagonal = agreement */}
           <line x1={x(1)} y1={y(1)} x2={x(26)} y2={y(26)} stroke="var(--muted)" strokeWidth={1.5} />
           <text x={W - PAD.r} y={PAD.t + 12} textAnchor="end" className="viz-anno">agrees with consensus →</text>
-          {pts.map((p) => {
+          {pts.map((p, pi) => {
             const big = Math.abs(p.diff) >= 5;
             const color = p.diff < -0.5 ? "var(--up)" : p.diff > 0.5 ? "var(--down)" : "var(--muted)";
+            // Jitter NR pile-ups so stacked points stay visible.
+            const jx = p.consensusRank === null ? ((pi * 37) % 11) - 5 : 0;
+            const jy = p.voterRank === null ? ((pi * 53) % 11) - 5 : 0;
+            const cx = x(p.consensusRank) + jx;
+            const cy = y(p.voterRank) + jy;
             return (
               <g key={p.team}>
-                <circle cx={x(p.consensusRank)} cy={y(p.voterRank)} r={big ? 7 : 4.5} fill={color} opacity={big ? 0.95 : 0.55}>
+                <circle cx={cx} cy={cy} r={big ? 7 : 4.5} fill={color} opacity={big ? 0.95 : 0.55}>
                   <title>{`${p.teamName} — voter #${p.voterRank ?? "NR"}, consensus #${p.consensusRank ?? "NR"}`}</title>
                 </circle>
                 {big && (
-                  <text x={x(p.consensusRank) + 10} y={y(p.voterRank) - 8} className="viz-label" fill={color}>
+                  <text x={cx + 10} y={cy - 8} className="viz-label" fill={color}>
                     {p.teamName} ({p.diff > 0 ? "+" : ""}{p.diff})
                   </text>
                 )}
