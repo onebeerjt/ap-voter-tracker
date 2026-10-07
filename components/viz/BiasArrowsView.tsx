@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { biasArrows, voterName, voterOptions } from "@/lib/viz";
-import { Picker, StoryLead, LeanArrow, DivergeBar, fmtDiff } from "./ui";
+import { Picker, StoryLead, BigArrow, DivergeBar, fmtDiff } from "./ui";
 
 /**
  * VIEW 2 — "The arrows": each voter's conference leans as annotated arrows.
@@ -52,7 +52,7 @@ export default function BiasArrowsView({ season }: { season: number }) {
           {arrows.map((a) => (
             <div key={a.conference} className="viz-arrow-row">
               <div className="viz-arrow-conf">
-                <LeanArrow diff={a.avgDiff} size={18} />
+                <BigArrow diff={a.avgDiff} />
                 <strong>{a.conference}</strong>
               </div>
               <DivergeBar value={a.avgDiff} />

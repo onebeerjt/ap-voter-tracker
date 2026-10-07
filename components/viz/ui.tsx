@@ -49,6 +49,29 @@ export function Stat({ label, value, tone }: { label: string; value: string; ton
   );
 }
 
+/** Big dramatic arrow: size scales with |diff|. */
+export function BigArrow({ diff }: { diff: number }) {
+  const mag = Math.min(1, Math.abs(diff) / 6);
+  const size = 28 + mag * 44;
+  const up = diff < -0.4;
+  const down = diff > 0.4;
+  const color = up ? "var(--up)" : down ? "var(--down)" : "var(--muted)";
+  const opacity = 0.35 + mag * 0.65;
+  if (!up && !down) return <span style={{ color, fontSize: 20 }}>●</span>;
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" style={{ opacity, flexShrink: 0 }}>
+      <path
+        d={up ? "M8 13.5 V2.5 M3.5 7 L8 2.5 L12.5 7" : "M8 2.5 V13.5 M3.5 9 L8 13.5 L12.5 9"}
+        fill="none"
+        stroke={color}
+        strokeWidth={3}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /** Inline SVG arrow: direction from a signed diff (negative diff = ranked higher = up arrow). */
 export function LeanArrow({ diff, size = 14 }: { diff: number; size?: number }) {
   const up = diff < -0.4;
