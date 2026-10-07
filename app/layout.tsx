@@ -10,7 +10,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('apvt-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>
         <header className="site-header">
           <div className="inner">
@@ -20,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav>
               <Link href="/">Consensus</Link>
               <Link href="/voters">Voters</Link>
-              <Link href="/viz">Visual stories</Link>
+              <Link href="/viz">Voter Report</Link>
               <Link href="/about">About</Link>
             </nav>
           </div>

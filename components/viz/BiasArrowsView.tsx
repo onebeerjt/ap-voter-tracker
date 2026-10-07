@@ -23,7 +23,7 @@ export default function BiasArrowsView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 2 · The arrows"
+        kicker="Deep dive · The arrows"
         title="Follow the arrows"
         body={
           <>

@@ -51,7 +51,7 @@ export default function DriftView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 5 · The drift"
+        kicker="Deep dive · The drift"
         title="When did they jump on — or off?"
         body={
           <>

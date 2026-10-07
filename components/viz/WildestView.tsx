@@ -16,7 +16,7 @@ export default function WildestView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 6 · The rogues' gallery"
+        kicker="Deep dive · The rogues' gallery"
         title="The wildest ballots of the season"
         body={
           <>

@@ -13,11 +13,23 @@ const PAD = { l: 46, r: 16, t: 14, b: 40 };
  * VIEW 1 — "You vs Everybody": voter rank vs consensus rank scatter.
  * Points on the diagonal agree with the pack; off-diagonal points are the story.
  */
-export default function ScatterView({ season }: { season: number }) {
+export default function ScatterView({
+  season,
+  initialVoter,
+  initialWeek,
+}: {
+  season: number;
+  initialVoter?: string;
+  initialWeek?: number;
+}) {
   const voters = useMemo(() => voterOptions(season), [season]);
   const weeks = seasonMeta(season).weeks;
-  const [voter, setVoter] = useState(voters[0]?.id ?? "");
-  const [week, setWeek] = useState(String(latestWeek(season)));
+  const [voter, setVoter] = useState(
+    initialVoter && voters.some((v) => v.id === initialVoter) ? initialVoter : voters[0]?.id ?? "",
+  );
+  const [week, setWeek] = useState(
+    String(initialWeek && weeks.some((w) => w.week === initialWeek) ? initialWeek : latestWeek(season)),
+  );
 
   const pts = useMemo(() => scatterFor(voter, season, Number(week)), [voter, season, week]);
   const name = voters.find((v) => v.id === voter)?.name ?? voter;
@@ -38,7 +50,7 @@ export default function ScatterView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 1 · The scatter"
+        kicker="Deep dive · The scatter"
         title="You vs everybody"
         body={
           <>

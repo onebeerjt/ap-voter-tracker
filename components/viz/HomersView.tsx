@@ -16,7 +16,7 @@ export default function HomersView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 8 · The homers"
+        kicker="Deep dive · The homers"
         title="Love is a +6.2"
         body={
           <>

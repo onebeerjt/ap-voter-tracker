@@ -36,7 +36,7 @@ export default function CrownView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 10 · The crown"
+        kicker="Deep dive · The crown"
         title="Who wore the crown, and when"
         body={
           <>

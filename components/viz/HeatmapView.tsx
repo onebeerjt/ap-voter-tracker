@@ -39,7 +39,7 @@ export default function HeatmapView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 4 · The grid"
+        kicker="Deep dive · The grid"
         title="The whole league's favoritism, one grid"
         body={
           <>

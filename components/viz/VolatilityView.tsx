@@ -28,7 +28,7 @@ export default function VolatilityView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 9 · The flip-floppers"
+        kicker="Deep dive · The flip-floppers"
         title="Steady hands and shaky ones"
         body={
           <>

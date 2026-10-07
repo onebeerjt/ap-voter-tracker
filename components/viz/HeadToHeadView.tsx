@@ -47,7 +47,7 @@ export default function HeadToHeadView({ season }: { season: number }) {
   return (
     <div>
       <StoryLead
-        kicker="Variation 7 · Head to head"
+        kicker="Deep dive · Head to head"
         title="Two voters enter. One ballot leaves."
         body={
           <>

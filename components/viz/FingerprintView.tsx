@@ -7,15 +7,17 @@ import { Picker, StoryLead, Stat, LeanArrow, DivergeBar, fmtDiff } from "./ui";
 /**
  * VIEW 3 — "Voter fingerprint": one card that profiles a voter at a glance.
  */
-export default function FingerprintView({ season }: { season: number }) {
+export default function FingerprintView({ season, initialVoter }: { season: number; initialVoter?: string }) {
   const voters = useMemo(() => voterOptions(season), [season]);
-  const [voter, setVoter] = useState(voters[0]?.id ?? "");
+  const [voter, setVoter] = useState(
+    initialVoter && voters.some((v) => v.id === initialVoter) ? initialVoter : voters[0]?.id ?? "",
+  );
   const fp = useMemo(() => fingerprint(voter, season), [voter, season]);
 
   return (
     <div>
       <StoryLead
-        kicker="Variation 3 · The fingerprint"
+        kicker="Deep dive · The fingerprint"
         title="Every voter has a fingerprint"
         body={
           <>
