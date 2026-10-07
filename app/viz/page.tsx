@@ -49,16 +49,16 @@ export default function VizPage() {
           </button>
         ))}
       </p>
-      <nav className="viz-tabs" aria-label="Visualizations">
+      <nav className="viz-tabs viz-tabs-rich" aria-label="Visualizations">
         {VIEWS.map((v) => (
           <button
             key={v.id}
             aria-pressed={view === v.id}
             onClick={() => setView(v.id)}
-            title={v.blurb}
-            className="viz-tab"
+            className="viz-tab viz-tab-rich"
           >
-            {v.label}
+            <span className="viz-tab-label">{v.label}</span>
+            <span className="viz-tab-blurb">{v.blurb}</span>
           </button>
         ))}
       </nav>

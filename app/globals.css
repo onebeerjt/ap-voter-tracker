@@ -147,3 +147,9 @@ input[type="search"] { min-width: 260px; }
   .viz-arrow-row { grid-template-columns: 130px 1fr 56px; }
   .viz-view { padding: 12px; }
 }
+
+.viz-tabs-rich { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.viz-tab-rich { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; border-radius: 10px; padding: 10px 12px; text-align: left; }
+.viz-tab-label { font-weight: 700; font-size: 13px; }
+.viz-tab-blurb { font-size: 12px; opacity: .75; font-weight: 400; }
+.viz-tab-rich[aria-pressed="true"] .viz-tab-blurb { opacity: .9; }
